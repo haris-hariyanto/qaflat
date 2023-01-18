@@ -18,7 +18,6 @@ class HomeController extends Controller
         
         // Get data
         $questions = Storage::get('index-pages/index-' . $currentIndexValue . '.json');
-        dd('index-pages/index-' . $currentIndexValue . '.json');
         $questions = json_decode($questions, true);
 
         return view('index', compact('questions'));
