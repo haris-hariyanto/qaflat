@@ -1,4 +1,9 @@
 <x-layouts.app>
+    @push('metaData')
+        {!! $metaData->render() !!}
+        {!! $openGraph->render() !!}
+    @endpush
+
     <x-slot:pageTitle>{{ $pageTitle }}</x-slot>
 
     <div class="container">
@@ -11,5 +16,7 @@
                 </div>
             @endforeach
         </div>
+
+        <x-pagination :next-URL="$nextPageURL" :previous-URL="$prevPageURL" :position="$currentPage" />
     </div>
 </x-layouts.app>

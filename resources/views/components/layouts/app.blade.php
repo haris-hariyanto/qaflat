@@ -20,5 +20,7 @@
         @include('components.layouts.navbar')
 
         {{ $slot }}
+
+        @include('components.layouts.footer')
     </body>
 </html>

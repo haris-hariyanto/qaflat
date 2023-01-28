@@ -55,6 +55,9 @@ class SaveContents extends Command
             $limitFiles = $filesTotal;
         }
 
+        $currentContentIDModel = MetaData::where('key', 'current_content_id')->first();
+        $currentContentID = $currentContentIDModel->value;
+
         $currentLoop = 1;
         $lastQuestion = '';
         foreach ($files as $file) {
@@ -77,7 +80,8 @@ class SaveContents extends Command
             if (strlen($slug) > 70) {
                 $slug = substr($slug, 0, 70);
             }
-            $slug = Str::slug($slug . ' ' . rand(1, 1000));
+            $slug = $currentContentID . '-' . Str::slug($slug);
+            $currentContentID++;
 
             $answersToSave = [];
             $count = 1;
@@ -126,6 +130,10 @@ class SaveContents extends Command
                 break;
             }
         }
+
+        $currentContentIDModel->update([
+            'value' => $currentContentID,
+        ]);
 
         // Create JSON data
 
@@ -349,6 +357,47 @@ class SaveContents extends Command
                 $iteration++;
             }
         } // [END] foreach
+
+        /** Sitemap */
+        $loop = true;
+        $segment = 1;
+        while ($loop) {
+            $take = config('content.sitemap_items');
+            $skip = $take * ($segment - 1);
+
+            $contents = Content::select('slug')
+                ->orderBy('id', 'asc')
+                ->skip($skip)
+                ->take($take)
+                ->get();
+            
+            if (count($contents) < $take) {
+                $loop = false;
+            }
+
+            $sitemap = [];
+            foreach ($contents as $content) {
+                $sitemap[] = [
+                    'url' => route('content', [$content->slug]),
+                    'created' => time(),
+                ];
+            }
+            $sitemap = json_encode($sitemap);
+
+            $currentSitemapIteration = MetaData::where('key', 'current_sitemap_iteration')->first();
+            $currentSitemapIterationValue = $currentSitemapIteration->value;
+            $currentSitemapIterationValue++;
+
+            $fileName = 'sitemap-' . $currentSitemapIterationValue . '.json';
+            $this->line('[ * ] Membuat sitemap ' . $fileName);
+            Storage::put('sitemaps/' . $fileName, $sitemap);
+
+            $currentSitemapIteration->update([
+                'value' => $currentSitemapIterationValue,
+            ]);
+
+            $segment++;
+        }
 
         Content::truncate();
         // [END] Create JSON data

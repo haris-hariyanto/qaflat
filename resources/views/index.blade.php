@@ -1,5 +1,10 @@
 <x-layouts.app>
-    <x-slot:pageTitle>{{ __('main.main_page_title') }}</x-slot>
+    @push('metaData')
+        {!! $metaData->render() !!}
+        {!! $openGraph->render() !!}
+    @endpush
+
+    <x-slot:pageTitle>{{ $pageTitle }}</x-slot>
 
     <div class="container">
 
@@ -30,6 +35,7 @@
             @endforeach
         </div>
         <!-- [END] Latest question -->
+        <x-pagination :next-URL="$nextPageURL" :previous-URL="$prevPageURL" :position="$currentPage" />
 
     </div>
 </x-layouts.app>

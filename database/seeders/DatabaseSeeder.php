@@ -24,7 +24,15 @@ class DatabaseSeeder extends Seeder
 
         DB::table('meta_data')->insert([
             'key' => 'current_index_iteration',
+            'value' => '0',
+        ]);
+        DB::table('meta_data')->insert([
+            'key' => 'current_content_id',
             'value' => '1',
+        ]);
+        DB::table('meta_data')->insert([
+            'key' => 'current_sitemap_iteration',
+            'value' => '0',
         ]);
     }
 }

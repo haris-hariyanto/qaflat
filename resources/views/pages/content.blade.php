@@ -1,4 +1,9 @@
 <x-layouts.app>
+    @push('metaData')
+        {!! $metaData->render() !!}
+        {!! $openGraph->render() !!}
+        {!! $structuredData->render() !!}
+    @endpush
     <x-slot:pageTitle>{{ $pageTitle }}</x-slot>
 
     <div class="container">
@@ -26,10 +31,10 @@
                     <div class="card-body">
                         <!-- Question data -->
                         <div class="mb-2 d-flex justify-content-between">
-                            <a href="#" class="btn btn-outline-dark btn-sm rounded-pill mb-1">
+                            <a href="{{ route('subject', [Str::slug($content['subject'])]) }}" class="btn btn-outline-dark btn-sm rounded-pill mb-1">
                                 <span class="small">{{ ucwords($content['subject']) }}</span>
                             </a>
-                            <a href="#" class="btn btn-outline-dark btn-sm rounded-pill mb-1">
+                            <a href="{{ route('grade', [Str::slug($content['grade'])]) }}" class="btn btn-outline-dark btn-sm rounded-pill mb-1">
                                 <span class="small">{{ $content['grade'] }}</span>
                             </a>
                         </div>
@@ -89,7 +94,7 @@
             <div class="col-12 col-lg-4">
                 <div class="card">
                     <div class="card-header">
-                        <b>{{ __('Other Questions') }}</b>
+                        <b>{{ __('main.other_questions') }}</b>
                     </div>
                     <div class="list-group list-group-flush">
                         @foreach ($content['internal_links'] as $internalLink)
