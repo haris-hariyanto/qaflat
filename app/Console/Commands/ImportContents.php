@@ -74,7 +74,7 @@ class ImportContents extends Command
     {
         $saveDestination = 'packed-files/packed-files.zip';
 
-        Storage::put($saveDestination, file_get_contents($fileURL));
+        Storage::disk('local')->put($saveDestination, file_get_contents($fileURL));
 
         $this->line('[ * ] File telah didownload');
         $this->line('[ * ] Mengekstrak file');
@@ -85,6 +85,6 @@ class ImportContents extends Command
             ->extractTo(storage_path('app/packed-files'));
         $this->line('[ * ] File telah diekstrak');
 
-        Storage::delete($saveDestination);
+        Storage::disk('local')->delete($saveDestination);
     }
 }

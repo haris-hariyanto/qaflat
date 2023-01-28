@@ -35,7 +35,7 @@ class SaveContents extends Command
     {
         $this->line('Save Contents');
 
-        $files = Storage::files('packed-files');
+        $files = Storage::disk('local')->files('packed-files');
         $filesTotal = count($files);
 
         $this->line('[ * ] Total file yang belum disimpan ke database : ' . $filesTotal);
@@ -63,13 +63,13 @@ class SaveContents extends Command
         foreach ($files as $file) {
             $this->line('[ ' . $currentLoop . ' ] Mengimport ' . $file);
 
-            $content = Storage::get($file);
+            $content = Storage::disk('local')->get($file);
             $content = json_decode($content, true);
 
             if (!$content || count($content['answers']) == 0 || $lastQuestion == $content['question']) {
                 $this->error('[ * ] Skip');
 
-                Storage::delete($file);
+                Storage::disk('local')->delete($file);
                 $currentLoop++;
 
                 continue;
@@ -123,7 +123,7 @@ class SaveContents extends Command
                 'name' => $content['subject'],
             ]);
 
-            Storage::delete($file);
+            Storage::disk('local')->delete($file);
 
             $currentLoop++;
             if ($currentLoop > $limitFiles) {
