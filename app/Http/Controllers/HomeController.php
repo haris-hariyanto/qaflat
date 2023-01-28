@@ -27,6 +27,7 @@ class HomeController extends Controller
         
         // Get data
         $questions = Storage::url('index-pages/index-' . $fileIndexToGet . '.json');
+        dd($questions);
         $questions = json_decode($questions, true);
 
         // Generate pagination URL
