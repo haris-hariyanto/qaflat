@@ -3,8 +3,7 @@ const jsFileName = 'app-09484a32.js';
 
 module.exports = {
     content: [
-        'resources/views/main/**/*.blade.php',
-        'resources/views/components/main/**/*.blade.php',
+        'resources/views/**/*.blade.php',
         `public/build/assets/${jsFileName}`,
     ],
     css: [
