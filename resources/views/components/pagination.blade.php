@@ -1,6 +1,6 @@
 @props(['previousURL' => false, 'nextURL' => false, 'position' => 1])
 
-<nav role="pagination" aria-label="Page navigation">
+<nav role="navigation" aria-label="Page navigation">
     <div class="row justify-content-between align-items-center g-2 my-3">
         <div class="col-6 col-sm-4 col-md-3 col-lg-2 d-grid">
 
