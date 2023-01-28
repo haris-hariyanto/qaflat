@@ -26,8 +26,7 @@ class HomeController extends Controller
         $fileIndexToGet = $currentIndexValue - ($currentPage - 1);
         
         // Get data
-        $questions = Storage::url('index-pages/index-' . $fileIndexToGet . '.json');
-        dd($questions);
+        $questions = Storage::get('index-pages/index-' . $fileIndexToGet . '.json');
         $questions = json_decode($questions, true);
 
         // Generate pagination URL
