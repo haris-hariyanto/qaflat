@@ -57,6 +57,19 @@ return [
             'throw' => false,
         ],
 
+        // Read only disk
+        'importer' => [
+            'driver' => 's3',
+            'key' => '004db05af61c4e40000000004',
+            'secret' => 'K004ACeLzGFqv7qpwU6tBm6wVMDs2sU',
+            'region' => 'us-west-004',
+            'bucket' => 'brainlyminer2',
+            'endpoint' => 'https://s3.us-west-004.backblazeb2.com',
+            'use_path_style_endpoint' => false,
+            'throw' => false,
+            'visibility' => 'public',
+        ],
+
     ],
 
     /*
