@@ -56,6 +56,8 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
+    'search_engine_id' => env('SEARCH_ENGINE_ID', ''),
+
     'asset_url' => env('ASSET_URL'),
 
     /*

@@ -18,8 +18,38 @@
                         >{{ __('main.home') }}</a>
                     </li>
                 </ul>
+
+                @if (Route::currentRouteName() != 'index' && !empty(config('app.search_engine_id')))
+                    <div class="mx-3 flex-fill d-none d-md-block">
+                        <form action="https://cse.google.com/cse" method="GET">
+                            <input type="hidden" name="cx" value="{{ config('app.search_engine_id') }}">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="q" placeholder="{{ __('main.search_placeholder') }}">
+                                <button class="btn btn-primary" type="submit">{{ __('main.search') }}</button>
+                            </div>
+                        </form>
+                    </div>
+                @endif
             </div>
 
         </div>
     </nav>
+
+    @if (Route::currentRouteName() != 'index' && !empty(config('app.search_engine_id')))
+        <!-- Search bar mobile -->
+        <div class="bg-dark d-block d-md-none">
+            <div class="container">
+                <form action="https://cse.google.com/cse" method="GET" class="pb-2">
+                    <div class="input-group">
+                        <input type="hidden" name="cx" value="{{ config('app.search_engine_id') }}">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="q" placeholder="{{ __('main.search_placeholder') }}">
+                            <button class="btn btn-primary" type="submit">{{ __('main.search') }}</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- [END] Search bar mobile -->
+    @endif
 </div>

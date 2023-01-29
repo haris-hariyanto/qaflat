@@ -23,4 +23,7 @@ return [
     'other_questions' => 'Pertanyaan Lainnya',
 
     'page_position' => 'Halaman :position',
+
+    'search_placeholder' => 'Cari jawaban untuk pertanyaan apapun',
+    'search' => 'Cari',
 ];
