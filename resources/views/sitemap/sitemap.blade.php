@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     @foreach ($sitemap as $sitemapItem)
         <url>
-            <loc>{{ $sitemapItem['url'] }}</loc>
+            <loc>{{ route('content', [$sitemapItem['url']]) }}</loc>
             <lastmod>{{ date('Y-m-d', $sitemapItem['created']) }}</lastmod>
             
             @if (!empty(config('content.sitemap_changefreq')))

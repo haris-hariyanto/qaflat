@@ -440,7 +440,7 @@ class ImportContentsBulk extends Command
             $sitemap = [];
             foreach ($contents as $content) {
                 $sitemap[] = [
-                    'url' => route('content', [$content->slug]),
+                    'url' => $content->slug,
                     'created' => time(),
                 ];
             }
