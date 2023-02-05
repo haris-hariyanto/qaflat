@@ -15,6 +15,8 @@
         @vite(['resources/css/tailwind.css'])
 
         @stack('scripts')
+
+        {!! setting('site.script_head') !!}
     </head>
     <body>
         @include('components.layouts.navbar')
@@ -22,5 +24,7 @@
         {{ $slot }}
 
         @include('components.layouts.footer')
+
+        {!! setting('site.script_footer') !!}
     </body>
 </html>

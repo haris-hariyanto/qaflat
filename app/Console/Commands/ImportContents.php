@@ -72,9 +72,11 @@ class ImportContents extends Command
 
     public function getPackedFile($fileURL)
     {
+        $fileURL = str_replace('https://f004.backblazeb2.com/file/brainlyminer2/', '', $fileURL);
+
         $saveDestination = 'packed-files/packed-files.zip';
 
-        Storage::disk('local')->put($saveDestination, file_get_contents($fileURL));
+        Storage::disk('local')->put($saveDestination, Storage::disk('importer')->get($fileURL));
 
         $this->line('[ * ] File telah didownload');
         $this->line('[ * ] Mengekstrak file');
