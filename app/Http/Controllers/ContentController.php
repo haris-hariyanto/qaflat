@@ -14,6 +14,10 @@ class ContentController extends Controller
 {
     public function index($content)
     {
+        if ($content == 'slug') {
+            return redirect()->route('index');
+        }
+        
         // Get data
         $content = Storage::get('single-pages/' . $content . '.json');
         $content = json_decode($content, true);
